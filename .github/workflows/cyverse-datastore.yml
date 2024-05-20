@@ -29,8 +29,11 @@ jobs:
 
     - name: Set up CyVerse credentials
       run: |
-        echo "export CYVERSE_USERNAME=${{ secrets.CYVERSE_USERNAME }}" >> $GITHUB_ENV
-        echo "export CYVERSE_PASSWORD=${{ secrets.CYVERSE_PASSWORD }}" >> $GITHUB_ENV
+        echo "export IRODS_HOST=${{ secrets.IRODS_HOST }}" >> $GITHUB_ENV
+        echo "export IRODS_PORT=${{ secrets.IRODS_PORT }}" >> $GITHUB_ENV
+        echo "export IRODS_USER_NAME=${{ secrets.IRODS_USER_NAME }}" >> $GITHUB_ENV
+        echo "export IRODS_USER_PASSWORD=${{ secrets.IRODS_USER_PASSWORD }}" >> $GITHUB_ENV
+        echo "export IRODS_ZONE_NAME=${{ secrets.IRODS_ZONE_NAME }}" >> $GITHUB_ENV
 
     - name: Run Python script
       run: |
