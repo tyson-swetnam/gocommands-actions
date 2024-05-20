@@ -35,10 +35,6 @@ jobs:
         echo "export IRODS_USER_PASSWORD=${{ secrets.IRODS_USER_PASSWORD }}" >> $GITHUB_ENV
         echo "export IRODS_ZONE_NAME=${{ secrets.IRODS_ZONE_NAME }}" >> $GITHUB_ENV
 
-    - name: Run Python script
-      run: |
-        python script.py
-
     - name: Upload to CyVerse
       run: |
         ./gocmd put --force --progress /test_folder /iplant/home/${{secrets.IRODS_USER_NAME}}/test_folder
