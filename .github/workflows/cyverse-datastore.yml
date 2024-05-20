@@ -45,4 +45,4 @@ jobs:
 
     - name: Upload to CyVerse
       run: |
-        gocmd put --force --progress test_folder2 /iplant/home/${{secrets.IRODS_USER_NAME}}/
+        gocmd put --force --progress test_folder2 /iplant/home/${{secrets.CYVERSE_USERNAME}}/
