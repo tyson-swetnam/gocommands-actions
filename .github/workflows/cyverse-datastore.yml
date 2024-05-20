@@ -43,7 +43,9 @@ jobs:
         }
         EOF
 
-    - name: Upload to CyVerse
+    - name: Upload folder to CyVerse
+      env:
+        IRODS_USER_NAME: ${{ secrets.CYVERSE_USERNAME }}
+        IRODS_USER_PASSWORD: ${{ secrets.CYVERSE_PASSWORD }}
       run: |
-        gocmd ls && \
-        gocmd put --force --progress test_folder2 /iplant/home/${{secrets.CYVERSE_USERNAME}}/
+        echo "${{ secrets.CYVERSE_PASSWORD }}" | gocmd put --force --progress test_folder2 /iplant/home/${{secrets.CYVERSE_USERNAME}}/
