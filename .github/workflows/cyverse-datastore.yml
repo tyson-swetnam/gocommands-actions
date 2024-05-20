@@ -27,13 +27,21 @@ jobs:
         curl -L -s https://github.com/cyverse/gocommands/releases/download/${GOCMD_VER}/gocmd-${GOCMD_VER}-linux-amd64.tar.gz | tar zxvf -
         sudo mv gocmd /usr/local/bin/
 
-    - name: Set up CyVerse Credentials
+    - name: Set up CyVerse credentials
+      env:
+        CYVERSE_USERNAME: ${{ secrets.CYVERSE_USERNAME }}
+        CYVERSE_PASSWORD: ${{ secrets.CYVERSE_PASSWORD }}
       run: |
-        echo "export IRODS_HOST=${{ secrets.IRODS_HOST }}" >> $GITHUB_ENV
-        echo "export IRODS_PORT=${{ secrets.IRODS_PORT }}" >> $GITHUB_ENV
-        echo "export IRODS_USER_NAME=${{ secrets.IRODS_USER_NAME }}" >> $GITHUB_ENV
-        echo "export IRODS_USER_PASSWORD=${{ secrets.IRODS_USER_PASSWORD }}" >> $GITHUB_ENV
-        echo "export IRODS_ZONE_NAME=${{ secrets.IRODS_ZONE_NAME }}" >> $GITHUB_ENV
+        mkdir -p ~/.irods
+        cat <<EOF > ~/.irods/irods_environment.json
+        {
+          "irods_host": "data.cyverse.org",
+          "irods_port": 1247,
+          "irods_user_name": "${{ secrets.CYVERSE_USERNAME }}",
+          "irods_zone_name": "iplant",
+          "irods_user_password": "${{ secrets.CYVERSE_PASSWORD }}"
+        }
+        EOF
 
     - name: Upload to CyVerse
       run: |
