@@ -31,5 +31,9 @@ jobs:
       env:
         IRODS_USER_NAME: ${{ secrets.CYVERSE_USERNAME }}
         IRODS_USER_PASSWORD: ${{ secrets.CYVERSE_PASSWORD }}
+        IRODS_HOST: data.cyverse.org
+        IRODS_PORT: 1247
+        IRODS_ZONE_NAME: iplant
       run: |
-        echo "${{ secrets.CYVERSE_PASSWORD }}" | gocmd put --force --progress test_folder2 /iplant/home/${{secrets.CYVERSE_USERNAME}}/
+        gocmd put --force --progress test_folder2 /iplant/home/${{secrets.CYVERSE_USERNAME}}/
+      
